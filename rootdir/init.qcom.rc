@@ -127,6 +127,10 @@ on boot
     mkdir /persist/misc 0770 system system
     mkdir /persist/alarm 0770 system system
     mkdir /persist/time 0770 system system
+    mkdir /persist/rfs 0770 root system
+    mkdir /persist/hlos_rfs 0770 root system
+    chmod 0770 /persist/rfs
+    chmod 0770 /persist/hlos_rfs
     restorecon_recursive /persist
 
     #Create NETMGR daemon socket area
@@ -431,6 +435,7 @@ service vendor.rmt_storage /vendor/bin/rmt_storage
 service vendor.tftp_server /vendor/bin/tftp_server
    class core
    user root
+   group root system
    writepid /dev/cpuset/system-background/tasks
 
 on property:vendor.wc_transport.start_hci=true
